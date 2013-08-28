@@ -1,0 +1,16 @@
+[
+	{
+		"title": "demo1",
+		"author": "shprink",
+		"description": "A really good demo indeed",
+		"date": "2013/08/12",
+		"thumbnail": "img/demo1.png"
+	},
+	{
+		"title": "demo2",
+		"author": "shprink",
+		"description": "A really good demo indeed",
+		"date": "2013/08/18",
+		"thumbnail": "img/demo2.png"
+	}
+]
