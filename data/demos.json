@@ -4,13 +4,47 @@
 		"author": "shprink",
 		"description": "A really good demo indeed",
 		"date": "2013/08/12",
-		"thumbnail": "img/demo1.png"
+		"thumbnail": "img/demo1.png",
+		"slug": "demo1_here"
 	},
 	{
 		"title": "demo2",
 		"author": "shprink",
 		"description": "A really good demo indeed",
 		"date": "2013/08/18",
-		"thumbnail": "img/demo2.png"
+		"thumbnail": "img/demo2.png",
+		"slug": "demo2_here"
+	},
+	{
+		"title": "demo3",
+		"author": "shprink",
+		"description": "A really good demo indeed",
+		"date": "2013/08/12",
+		"thumbnail": "img/demo1.png",
+		"slug": "demo3_here"
+	},
+	{
+		"title": "demo4",
+		"author": "shprink",
+		"description": "A really good demo indeed",
+		"date": "2013/08/18",
+		"thumbnail": "img/demo2.png",
+		"slug": "demo4_here"
+	},
+	{
+		"title": "demo5",
+		"author": "shprink",
+		"description": "A really good demo indeed",
+		"date": "2013/08/12",
+		"thumbnail": "img/demo1.png",
+		"slug": "demo5_here"
+	},
+	{
+		"title": "demo6",
+		"author": "shprink",
+		"description": "A really good demo indeed",
+		"date": "2013/08/18",
+		"thumbnail": "img/demo2.png",
+		"slug": "demo6_here"
 	}
 ]
