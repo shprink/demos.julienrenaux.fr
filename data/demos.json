@@ -1,11 +1,12 @@
 [
 	{
-		"title": "demo1",
+		"title": "Load more widget using PHP, ajax and JQuery",
 		"author": "shprink",
 		"description": "A really good demo indeed",
-		"date": "2013/08/12",
-		"thumbnail": "img/demo1.png",
-		"slug": "demo1_here"
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"tutorial" : "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more"
 	},
 	{
 		"title": "demo2",

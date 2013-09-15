@@ -3,8 +3,30 @@
 		<div class="col-md-12 col-lg-12">
 			<div class="caption">
 				<h2>{{item.title}}</h2>
-				<p>{{item.description}}</p>
-				<div class="well well-sm">By {{item.author}}</div>
+				<div class="iframe-wrap iframe-item">
+					<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
+				</div>
+				<h2>Code</h2>
+				<div class="row">
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default" data-ng-repeat="language in item.code">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{$index}}">
+										{{language.name}}
+									</a>
+								</h4>
+							</div>
+							<div id="collapse{{$index}}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<div class="iframe-wrap iframe-item">
+										<iframe src="{{language.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
