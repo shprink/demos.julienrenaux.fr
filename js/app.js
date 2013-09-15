@@ -1,7 +1,7 @@
 angular.module('democenter', ['demoFactory', 'ngRoute'])
 		.config(function($routeProvider, $sceDelegateProvider) {
 	$sceDelegateProvider.resourceUrlWhitelist([
-		'examples.julienrenaux.fr', 
+		'examples.julienrenaux.fr',
 		'/template'
 	]);
 	$routeProvider.
@@ -36,7 +36,14 @@ function DemoListCtrl($scope, $cacheFactory, $log, $http, Demo) {
 	var $httpDefaultCache = $cacheFactory.get('$http');
 	$log.log($httpDefaultCache.removeAll());
 	//$cacheFactory.get('$http').removeAll();
-	$scope.list = Demo.query()
+	$scope.list = Demo.query();
+
+	$scope.$on('$routeChangeStart', function(scope, next, current) {
+		console.log('Changing from ' + angular.toJson(current) + ' to ' + angular.toJson(next));
+	});
+	$scope.$on('$routeChangeSuccess', function(scope, next, current) {
+		console.log('success');
+	});
 }
 
 DemoListCtrl.$inject = ['$scope', '$cacheFactory', '$log', '$http', 'Demo'];
@@ -47,10 +54,11 @@ function DemoItemCtrl($scope, $routeParams, Demo) {
 	}, function(demo) {
 		$scope.item = demo;
 	}, function(error) {
-		$scope.item = {name: 'Oups Something wrong happened'};
+		$scope.item = {
+			name: 'Oups Something wrong happened'
+		};
 	});
 	$("#accordion").collapse();
 }
-
 
 DemoItemCtrl.$inject = ['$scope', '$routeParams', 'Demo'];
