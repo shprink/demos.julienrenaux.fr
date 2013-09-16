@@ -3,16 +3,18 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html ng-app="democenter">
+<html data-ng-app="democenter">
 	<head>
 		<title>Julien Renaux Demo Center</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
-		<script src="bower_components/angular/angular.js"></script>
-		<script src="lib/angular/angular-route.js"></script>
-		<script src="lib/angular/angular-resource.js"></script>
+		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<script src="bower_components/jquery/jquery.min.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="js/app.js"></script>
 	</head>
@@ -26,20 +28,18 @@ and open the template in the editor.
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#/demos">Brand</a>
+					<a class="navbar-brand" href="http://julienrenaux.fr/"><i class="icon-home icon-white"> </i> Julien Renaux						</a>
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Link</a></li>
-						<li><a href="#">Link</a></li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+					<ul id="menu-top" class="nav navbar-nav">
+						<li id="menu-item-677"><a tabindex="-1" href="http://julienrenaux.fr/category/programming/">Programming</a></li>
+						<li id="menu-item-967"><a tabindex="-1" href="http://julienrenaux.fr/category/programming/tutorials/">Tutorials</a></li>
+						<li id="menu-item-678"><a tabindex="-1" href="http://julienrenaux.fr/category/design/">Design</a></li>
+						<li id="menu-item-1261" ><a tabindex="-1" href="http://julienrenaux.fr/category/worth-sharing/">Worth Sharing</a></li>
+						<li id="menu-item-1261" class="active"><a tabindex="-1" href="#/demos">Demo Center</a></li>
+						<li id="menu-item-626"><a tabindex="-1" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Open Source <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
+								<li id="menu-item-614" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-614"><a tabindex="-1" href="http://julienrenaux.fr/shprinkone/">ShprinkOne WordPress Theme</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -51,13 +51,14 @@ and open the template in the editor.
 				<div class="row">
 					<div class="col-md-12 col-lg-12">
 						<h1>Demo Center</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat, dolor ut lobortis placerat, lacus massa imperdiet justo, quis eleifend quam turpis ac sapien. Pellentesque vestibulum mi non ante aliquet interdum. Aenean tempus leo magna, eu rhoncus risus eleifend at.</p>
+						<p></p>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="container">
-			<div ng-view>TODO write content</div>
+			<div data-ng-view></div>
 		</div>
 	</body>
 </html>

@@ -10,20 +10,34 @@
 	<div class="row">
 		<div class="col-md-3 col-lg-3">
 			<div class="list-group">
-				<a data-ng-repeat="category in getCategories()" href="{{category.href}}" class="list-group-item {{isActive(category.name)}}">{{category.name}}<span class="badge">{{category.count}}</span></a>
+				<a data-ng-repeat="category in getCategories()" href="{{category.href}}" class="list-group-item {{isActive(category.name)}}">
+					{{category.name}}
+					<span class="badge">{{category.count}}</span>
+				</a>
 			</div>
 		</div>
 		<div class="col-md-10 col-lg-9">
 			<div class="row">
-				<div data-ng-repeat="item in list | filter:query | filter:{category: getRoute()} | orderBy:index:reverse" class="col-md-6 col-lg-6">
+				<div id="loadingWidget">
+					<div class="loadingContent">
+						<p>
+							<img alt="Loading  Content" src="images/ajax-loader.gif" /> Loading
+						</p>
+					</div>
+				</div>
+				<div data-ng-repeat="item in getList() | filter:query | filter:{category: getRoute()} | orderBy:index:reverse" class="col-md-6 col-lg-6">
 					<div class="thumbnail">
 						<div class="iframe-wrap iframe-list">
 							<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
 						</div>
-						<div class="caption">
+						<div class="backdrop-wrap modal-backdrop">
 							<h3><a href="#demos/{{item.slug}}">{{item.title}}</a></h3>
 							<p>{{item.description}}</p>
-							<div class="well well-sm">By {{item.author}}</div>
+						</div>
+						<div class="caption">
+							<div class="well well-sm">
+								<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -32,3 +46,13 @@
 
 	</div>
 </section>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+									var js, fjs = d.getElementsByTagName(s)[0];
+									if (d.getElementById(id))
+										return;
+									js = d.createElement(s);
+									js.id = id;
+									js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+									fjs.parentNode.insertBefore(js, fjs);
+								}(document, 'script', 'facebook-jssdk'));</script>

@@ -84,3 +84,62 @@ iframe{
 .list-group a {
 	text-transform: capitalize;
 }
+
+.thumbnail{
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.backdrop-wrap.modal-backdrop{
+	position: absolute;
+	height: 200px;
+	right: 0px;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	width: 100%;
+	-webkit-transition: opacity 0.5s ease;
+	-moz-transition: opacity 0.5s ease;
+	-o-transition: opacity 0.5s ease;
+	transition: opacity 0.5s ease;
+	background: rgba(0,0,0,0.9);
+	opacity: 0;
+	padding: 20px;
+	background-color: #2c3e50;
+}
+.backdrop-wrap.modal-backdrop:hover{
+	opacity: 0.8;
+}
+
+.backdrop-wrap.modal-backdrop p{
+	color: white;
+}
+
+.backdrop-wrap.modal-backdrop h3 a{
+	color: white;
+	font-size: 0.9em;
+}
+
+.loaded{
+	-webkit-transition: linear 1s;
+	-moz-transition: linear 1s;
+	-ns-transition: linear 1s;
+	-o-transition: linear 1s;
+	transition: linear 1s;
+}
+
+.loaded.ng-enter{
+	opacity: 0;
+}
+
+.loaded.ng-enter-active{
+	opacity: 1;
+}
+
+.loaded.ng-leave{
+	opacity: 1;
+}
+
+.loaded.ng-leave-active{
+	opacity: 0;
+}
