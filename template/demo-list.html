@@ -10,8 +10,7 @@
 	<div class="row">
 		<div class="col-md-3 col-lg-3">
 			<div class="list-group">
-				<a href="#demos" class="list-group-item active">All<span class="badge">{{list.length}}</span></a>
-				<a data-ng-repeat="category in getCategories()" href="#demos-{{category.name}}" class="list-group-item">{{category.name}}<span class="badge">{{category.count}}</span></a>
+				<a data-ng-repeat="category in getCategories()" href="{{category.href}}" class="list-group-item {{isActive(category.name)}}">{{category.name}}<span class="badge">{{category.count}}</span></a>
 			</div>
 		</div>
 		<div class="col-md-10 col-lg-9">

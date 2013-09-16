@@ -48,20 +48,28 @@ function DemoListCtrl($scope, $filter, $routeParams, $cacheFactory, $log, $http,
 	}
 
 	$scope.isActive = function(category){
-		$log.log(category);
-		if (category === $scope.getRoute){
+		$log.log(category, 'category');
+		$log.log($scope.getRoute(), '$scope.getRoute');
+		if (category === $scope.getRoute() || ($scope.getRoute() == '' && category === 'all')){
 			return 'active';
 		}
 		return '';
 	}
 	
 	$scope.getCategories = function(){
-		var categories = {};
+		var categories = {
+			'all' : {
+					'name' : 'all',
+					'count' : $scope.list.lenght,
+					'href' : '#demos'
+				}
+		};
 		angular.forEach($scope.list, function(value, key){
 			if (typeof categories[value.category] == 'undefined'){
 				categories[value.category] = {
 					'name' : value.category,
-					'count' : 0
+					'count' : 0,
+					'href' : '#demos-' + value.category
 				}
 			}
 			categories[value.category]['count']  += 1;
