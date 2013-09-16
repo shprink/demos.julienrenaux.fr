@@ -6,46 +6,47 @@
 		"date": "2013/06/13",
 		"slug": "load-more-widget-using-php-ajax-and-jquery",
 		"tutorial" : "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
-		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more"
+		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more",
+		"category" : "jquery"
 	},
 	{
-		"title": "demo2",
+		"title": "Load more widget using PHP, ajax and JQuery",
 		"author": "shprink",
 		"description": "A really good demo indeed",
-		"date": "2013/08/18",
-		"thumbnail": "img/demo2.png",
-		"slug": "demo2_here"
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"tutorial" : "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more",
+		"category" : "jquery"
 	},
 	{
-		"title": "demo3",
+		"title": "Load more widget using PHP, ajax and JQuery",
 		"author": "shprink",
 		"description": "A really good demo indeed",
-		"date": "2013/08/12",
-		"thumbnail": "img/demo1.png",
-		"slug": "demo3_here"
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"tutorial" : "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more",
+		"category" : "angularjs"
 	},
 	{
-		"title": "demo4",
+		"title": "Load more widget using PHP, ajax and JQuery",
 		"author": "shprink",
 		"description": "A really good demo indeed",
-		"date": "2013/08/18",
-		"thumbnail": "img/demo2.png",
-		"slug": "demo4_here"
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"tutorial" : "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more",
+		"category" : "angularjs"
 	},
 	{
-		"title": "demo5",
+		"title": "Load more widget using PHP, ajax and JQuery",
 		"author": "shprink",
 		"description": "A really good demo indeed",
-		"date": "2013/08/12",
-		"thumbnail": "img/demo1.png",
-		"slug": "demo5_here"
-	},
-	{
-		"title": "demo6",
-		"author": "shprink",
-		"description": "A really good demo indeed",
-		"date": "2013/08/18",
-		"thumbnail": "img/demo2.png",
-		"slug": "demo6_here"
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"tutorial" : "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more",
+		"category" : "mootools"
 	}
 ]

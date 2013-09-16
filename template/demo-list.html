@@ -1,26 +1,35 @@
 <div class="row">
 	<div class="col-md-6 col-lg-6">
 		<div class="input-group">
-			<input type="text" class="form-control" data-ng-model="query"/>
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">Search</button>
-			</span>
+			<span class="input-group-addon"><i class="icon-search"></i></span>
+			<input type="text" class="form-control" data-ng-model="query" placeholder="Search"/>
 		</div>
 	</div>
 </div>
 <section class="demo-list">
 	<div class="row">
-		<div data-ng-repeat="item in list | filter:query  | orderBy:index:reverse" class="col-md-4 col-lg-4">
-			<div class="thumbnail">
-				<div class="iframe-wrap iframe-list">
-					<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
-				</div>
-				<div class="caption">
-					<h3><a href="#demos/{{item.slug}}">{{item.title}}</a></h3>
-					<p>{{item.description}}</p>
-					<div class="well well-sm">By {{item.author}}</div>
+		<div class="col-md-3 col-lg-3">
+			<div class="list-group">
+				<a href="#demos" class="list-group-item active">All<span class="badge">{{list.length}}</span></a>
+				<a data-ng-repeat="category in getCategories()" href="#demos-{{category.name}}" class="list-group-item">{{category.name}}<span class="badge">{{category.count}}</span></a>
+			</div>
+		</div>
+		<div class="col-md-10 col-lg-9">
+			<div class="row">
+				<div data-ng-repeat="item in list | filter:query | filter:{category: getRoute()} | orderBy:index:reverse" class="col-md-6 col-lg-6">
+					<div class="thumbnail">
+						<div class="iframe-wrap iframe-list">
+							<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
+						</div>
+						<div class="caption">
+							<h3><a href="#demos/{{item.slug}}">{{item.title}}</a></h3>
+							<p>{{item.description}}</p>
+							<div class="well well-sm">By {{item.author}}</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 </section>

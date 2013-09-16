@@ -80,3 +80,7 @@ iframe{
 	visibility: visible;
 	opacity: 1;
 }
+
+.list-group a {
+	text-transform: capitalize;
+}
