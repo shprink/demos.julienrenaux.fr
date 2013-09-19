@@ -8,24 +8,24 @@
 </div>
 <section class="demo-list">
 	<div class="row">
-		<div class="col-md-3 col-lg-3">
+		<div id="loadingWidget">
+			<div class="loadingContent" data-ng-hide="loaded">
+				<p>
+					<img alt="Loading  Content" src="images/ajax-loader.gif" /> Loading
+				</p>
+			</div>
+		</div>
+		<div data-ng-show="loaded" class="col-md-3 col-lg-3">
 			<div class="list-group">
-				<a data-ng-repeat="category in getCategories()" href="{{category.href}}" class="list-group-item {{isActive(category.name)}}">
+				<a data-ng-repeat="category in getCategories()" data-ng-click="setCategory(category.name)"  class="list-group-item {{isActive(category.name)}}">
 					{{category.name}}
 					<span class="badge">{{category.count}}</span>
 				</a>
 			</div>
 		</div>
-		<div class="col-md-10 col-lg-9">
+		<div data-ng-show="loaded" class="col-md-10 col-lg-9">
 			<div class="row">
-				<div id="loadingWidget">
-					<div class="loadingContent">
-						<p>
-							<img alt="Loading  Content" src="images/ajax-loader.gif" /> Loading
-						</p>
-					</div>
-				</div>
-				<div data-ng-repeat="item in getList() | filter:query | filter:{category: getRoute()} | orderBy:index:reverse" class="col-md-6 col-lg-6">
+				<div data-ng-repeat="item in list | filter:query | filter:{category: category} | orderBy:index:reverse" class="col-md-6 col-lg-6">
 					<div class="thumbnail">
 						<div class="iframe-wrap iframe-list">
 							<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
@@ -48,11 +48,11 @@
 </section>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
-									var js, fjs = d.getElementsByTagName(s)[0];
-									if (d.getElementById(id))
-										return;
-									js = d.createElement(s);
-									js.id = id;
-									js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-									fjs.parentNode.insertBefore(js, fjs);
-								}(document, 'script', 'facebook-jssdk'));</script>
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id))
+		return;
+	js = d.createElement(s);
+	js.id = id;
+	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

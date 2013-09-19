@@ -1,31 +1,38 @@
 var app = angular.module('democenter', ['demoFactory', 'ngRoute'])
-		.config(function($routeProvider, $sceDelegateProvider) {
+.config(function($routeProvider, $sceDelegateProvider) {
 	$sceDelegateProvider.resourceUrlWhitelist([
 		'examples.julienrenaux.fr',
 		'connect.facebook.net',
 		'facebook.com',
 		'/template'
-	]);
+		]);
 	$routeProvider.
-			when('/demos', {templateUrl: 'template/demo-list.html', controller: DemoListCtrl}).
-			when('/demos-:category', {templateUrl: 'template/demo-list.html', controller: DemoListCtrl}).
-			when('/demos/:demoId', {templateUrl: 'template/demo-item.html', controller: DemoItemCtrl}).
-			otherwise({redirectTo: '/demos'});
+	when('/demos', {
+		templateUrl: 'template/demo-list.html', 
+		controller: DemoListCtrl
+	}).
+	when('/demos/:demoId', {
+		templateUrl: 'template/demo-item.html', 
+		controller: DemoItemCtrl
+	}).
+	otherwise({
+		redirectTo: '/demos'
+	});
 });
 
 angular.module('demoFactory', ['ngResource'])
-		.factory('Demo', function($resource) {
-	return $resource('data/:demoId.json', {}, {
-		query: {
-			method: 'GET',
-			params: {
-				demoId: 'demos'
-			},
-			isArray: true,
-			cache: false
-		}
+	.factory('Demo', function($resource) {
+		return $resource('data/:demoId.json', {}, {
+			query: {
+				method: 'GET',
+				params: {
+					demoId: 'demos'
+				},
+				isArray: true,
+				cache: false
+			}
+		});
 	});
-});
 
 //app.config(['$httpProvider', function ($httpProvider) {
 //    var $http,
@@ -67,20 +74,17 @@ angular.module('demoFactory', ['ngResource'])
 //	});
 //});
 
-function DemoListCtrl($scope, $filter, $routeParams, $cacheFactory, $log, $http, Demo) {
+function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, Demo) {
 	//var $httpDefaultCache = $cacheFactory.get('$http');
-//	$log.log($httpDefaultCache.removeAll());
+	//	$log.log($httpDefaultCache.removeAll());
 	//$cacheFactory.get('$http').removeAll();
 	$scope.loaded = false;
-	$scope.list = Demo.query();
+	$scope.category = '';
+	$scope.list = [];
 
-	$scope.getList = function() {
-
-		// Reload FB like button on newly inserted content
-		//window.FB.XFBML.parse();
-
-		return $scope.list;
-	}
+	$scope.list = Demo.query(function(){
+		$scope.loaded = true;
+	});
 
 	$scope.getRoute = function() {
 		if (typeof $routeParams.category != 'undefined') {
@@ -88,9 +92,17 @@ function DemoListCtrl($scope, $filter, $routeParams, $cacheFactory, $log, $http,
 		}
 		return '';
 	}
+	
+	$scope.setCategory = function(category) {
+		if (category == 'all'){
+			$scope.category = '';
+		}else{
+			$scope.category = category;
+		}
+	}
 
 	$scope.isActive = function(category) {
-		if (category === $scope.getRoute() || ($scope.getRoute() == '' && category === 'all')) {
+		if (category === $scope.category || ($scope.category == '' && category === 'all')) {
 			return 'active';
 		}
 		return '';
@@ -121,8 +133,6 @@ function DemoListCtrl($scope, $filter, $routeParams, $cacheFactory, $log, $http,
 		return categories
 	}
 	
-	$scope.loaded = true;
-	
 //	$scope.$on('$routeChangeStart', function(scope, next, current) {
 //		console.log('Changing from ' + angular.toJson(current) + ' to ' + angular.toJson(next));
 //	});
@@ -131,7 +141,7 @@ function DemoListCtrl($scope, $filter, $routeParams, $cacheFactory, $log, $http,
 //	});
 }
 
-DemoListCtrl.$inject = ['$scope', '$filter', '$routeParams', '$cacheFactory', '$log', '$http', 'Demo'];
+DemoListCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$log', '$filter', 'Demo'];
 
 function DemoItemCtrl($scope, $routeParams, Demo) {
 	Demo.get({
