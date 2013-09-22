@@ -8,14 +8,7 @@
 </div>
 <section class="demo-list">
 	<div class="row">
-		<div id="loadingWidget">
-			<div class="loadingContent" data-ng-hide="loaded">
-				<p>
-					<img alt="Loading  Content" src="images/ajax-loader.gif" /> Loading
-				</p>
-			</div>
-		</div>
-		<div data-ng-show="loaded" class="col-md-3 col-lg-3">
+		<div class="col-md-3 col-lg-3">
 			<div class="list-group">
 				<a data-ng-repeat="category in getCategories()" data-ng-click="setCategory(category.name)"  class="list-group-item {{isActive(category.name)}}">
 					{{category.name}}

@@ -81,9 +81,11 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 	$scope.loaded = false;
 	$scope.category = '';
 	$scope.list = [];
+	NProgress.start();
 
 	$scope.list = Demo.query(function(){
 		$scope.loaded = true;
+		NProgress.done();
 	});
 
 	$scope.getRoute = function() {
@@ -144,14 +146,17 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 DemoListCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$log', '$filter', 'Demo'];
 
 function DemoItemCtrl($scope, $routeParams, Demo) {
+	NProgress.start();
 	Demo.get({
 		demoId: $routeParams.demoId
 	}, function(demo) {
 		$scope.item = demo;
+		NProgress.done();
 	}, function(error) {
 		$scope.item = {
 			name: 'Oups Something wrong happened'
 		};
+		NProgress.done();
 	});
 	$("#accordion").collapse();
 }

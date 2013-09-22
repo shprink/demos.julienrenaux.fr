@@ -88,6 +88,14 @@ iframe{
 .thumbnail{
 	margin-bottom: 20px;
 	position: relative;
+	padding: 0px;
+}
+
+.thumbnail .caption{
+	padding: 0px;
+}
+.thumbnail .caption .well{
+	margin: 0px;
 }
 
 .backdrop-wrap.modal-backdrop{
@@ -106,6 +114,7 @@ iframe{
 	opacity: 0;
 	padding: 20px;
 	background-color: #2c3e50;
+	overflow: hidden;
 }
 .backdrop-wrap.modal-backdrop:hover{
 	opacity: 0.8;
@@ -113,6 +122,10 @@ iframe{
 
 .backdrop-wrap.modal-backdrop p{
 	color: white;
+}
+
+.backdrop-wrap.modal-backdrop h3{
+	margin-top: 0px;
 }
 
 .backdrop-wrap.modal-backdrop h3 a{
@@ -142,4 +155,34 @@ iframe{
 
 .loaded.ng-leave-active{
 	opacity: 0;
+}
+
+#nprogress .bar {
+	background: white;
+}
+
+#nprogress .peg {
+	box-shadow: 0 0 10px #29d 0 0 5px #29d;
+}
+
+#nprogress .bar,
+#nprogress .spinner {
+	z-index: 1040;
+}
+
+#nprogress .spinner {
+	top: 18px;
+}
+
+#nprogress .spinner-icon {
+	border-top-color:  #FFF;
+	border-left-color: #FFF;
+	width: 25px;
+	height: 25px;
+	border-radius: 25px;
+}
+
+#content{
+	min-height: 400px;
+	margin-bottom: 50px;
 }

@@ -1,0 +1,26 @@
+{
+	"title": "Load more widget using PHP, ajax and JQuery",
+	"date": "2013/06/13",
+	"slug": "load-more-widget-using-php-ajax-and-jquery",
+	"tutorial": "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+	"iframe": "http://examples.julienrenaux.fr/jquery/load-more",
+	"code" : [
+		{
+			"name" : "PHP",
+			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/php.html"
+		},
+		{
+			"name" : "JavaScript (Mootools)",
+			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/js.html"
+		},
+		{
+			"name" : "HTML",
+			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/html.html"
+		}
+		,
+		{
+			"name" : "Mustache.js",
+			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/mustache.html"
+		}
+	]
+}
