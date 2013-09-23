@@ -1,26 +1,37 @@
 {
-	"title": "Load more widget using PHP, ajax and JQuery",
-	"date": "2013/06/13",
-	"slug": "load-more-widget-using-php-ajax-and-jquery",
-	"tutorial": "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
-	"iframe": "http://examples.julienrenaux.fr/jquery/load-more",
-	"code" : [
+	"title": "Load more widget using PHP, Ajax, Mootools, Bootstrap and Mustache.js",
+	"date": "2012/10/04",
+	"slug": "load-more-widget-using-php-ajax-mootools-bootstrap-and-mustache-js",
+	"tutorial": "http://julienrenaux.fr/2012/10/04/create-a-load-more-widget-using-php-ajax-mootools-bootstrap-and-mustache-js",
+	"iframe": "http://examples.julienrenaux.fr/mootools/load-more",
+	"zip" : "http://julienrenaux.fr/wp-content/uploads/2012/10/demo.zip",
+	"code": [
 		{
-			"name" : "PHP",
-			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/php.html"
+			"name": "PHP",
+			"iframe": "http://examples.julienrenaux.fr/mootools/load-more/php.html"
 		},
 		{
-			"name" : "JavaScript (Mootools)",
-			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/js.html"
+			"name": "JavaScript (Mootools)",
+			"iframe": "http://examples.julienrenaux.fr/mootools/load-more/js.html"
 		},
 		{
-			"name" : "HTML",
-			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/html.html"
+			"name": "HTML",
+			"iframe": "http://examples.julienrenaux.fr/mootools/load-more/html.html"
 		}
 		,
 		{
-			"name" : "Mustache.js",
-			"iframe" : "http://examples.julienrenaux.fr/mootools/load-more/mustache.html"
+			"name": "Mustache.js",
+			"iframe": "http://examples.julienrenaux.fr/mootools/load-more/mustache.html"
 		}
-	]
+	],
+	"next": {
+		"title": "Load more widget using PHP, ajax and JQuery",
+		"author": "shprink",
+		"description": "Lear how to create one for WordPress using PHP, Bootstrap and jQuery",
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"tutorial": "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
+		"iframe": "http://examples.julienrenaux.fr/jquery/load-more",
+		"category": "jquery"
+	}
 }

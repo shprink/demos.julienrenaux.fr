@@ -16,7 +16,7 @@
 				</a>
 			</div>
 		</div>
-		<div data-ng-show="loaded" class="col-md-10 col-lg-9">
+		<div data-ng-show="loaded"class="col-md-10 col-lg-9">
 			<div class="row">
 				<div data-ng-repeat="item in list | filter:query | filter:{category: category} | orderBy:index:reverse" class="col-md-6 col-lg-6">
 					<div class="thumbnail">
@@ -30,6 +30,9 @@
 						<div class="caption">
 							<div class="well well-sm">
 								<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+							<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-sm pull-right"><i class="icon-download"></i> Download</a>
+							<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-sm pull-right">Tutorial</a>
+							
 							</div>
 						</div>
 					</div>

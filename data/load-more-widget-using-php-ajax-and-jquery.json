@@ -4,18 +4,29 @@
 	"slug": "load-more-widget-using-php-ajax-and-jquery",
 	"tutorial": "http://julienrenaux.fr/2013/06/13/create-a-load-more-widget-using-php-ajax-and-jquery",
 	"iframe": "http://examples.julienrenaux.fr/jquery/load-more",
-	"code" : [
+	"zip" : "http://julienrenaux.fr/wp-content/uploads/2013/06/load-more-jquery.zip",
+	"code": [
 		{
-			"name" : "PHP",
-			"iframe" : "http://examples.julienrenaux.fr/jquery/load-more/php.html"
+			"name": "PHP",
+			"iframe": "http://examples.julienrenaux.fr/jquery/load-more/php.html"
 		},
 		{
-			"name" : "JavaScript (JQuery)",
-			"iframe" : "http://examples.julienrenaux.fr/jquery/load-more/js.html"
+			"name": "JavaScript (JQuery)",
+			"iframe": "http://examples.julienrenaux.fr/jquery/load-more/js.html"
 		},
 		{
-			"name" : "HTML",
-			"iframe" : "http://examples.julienrenaux.fr/jquery/load-more/html.html"
+			"name": "HTML",
+			"iframe": "http://examples.julienrenaux.fr/jquery/load-more/html.html"
 		}
-	]
+	],
+	"previous": {
+		"title": "Load more widget using PHP, Ajax, Mootools, Bootstrap and Mustache.js",
+		"author": "shprink",
+		"description": "Load more widgets are really popular in the web. This tutorial explain how to create one for your WordPress website using Mootools, Bootstrap and Mustache.js",
+		"date": "2012/10/04",
+		"slug": "load-more-widget-using-php-ajax-mootools-bootstrap-and-mustache-js",
+		"tutorial": "http://julienrenaux.fr/2012/10/04/create-a-load-more-widget-using-php-ajax-mootools-bootstrap-and-mustache-js",
+		"iframe": "http://examples.julienrenaux.fr/mootools/load-more",
+		"category": "mootools"
+	}
 }
