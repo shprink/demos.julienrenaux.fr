@@ -1,38 +1,45 @@
 var app = angular.module('democenter', ['demoFactory', 'ngRoute'])
-.config(function($routeProvider, $sceDelegateProvider) {
+		.config(function($routeProvider, $sceDelegateProvider) {
 	$sceDelegateProvider.resourceUrlWhitelist([
 		'examples.julienrenaux.fr',
 		'connect.facebook.net',
 		'facebook.com',
 		'/template'
-		]);
+	]);
 	$routeProvider.
-	when('/demos', {
-		templateUrl: 'template/demo-list.html', 
+			when('/demos', {
+		templateUrl: 'template/demo-list.html',
 		controller: DemoListCtrl
 	}).
-	when('/demos/:demoId', {
-		templateUrl: 'template/demo-item.html', 
+			when('/demos/:demoId', {
+		templateUrl: 'template/demo-item.html',
 		controller: DemoItemCtrl
 	}).
-	otherwise({
+			otherwise({
 		redirectTo: '/demos'
 	});
 });
 
 angular.module('demoFactory', ['ngResource'])
-	.factory('Demo', function($resource) {
-		return $resource('data/:demoId.json', {}, {
-			query: {
-				method: 'GET',
-				params: {
-					demoId: 'demos'
-				},
-				isArray: true,
-				cache: false
-			}
-		});
+		.factory('Demo', function($resource) {
+	return $resource('data/:demoId.json', {}, {
+		query: {
+			method: 'GET',
+			params: {
+				demoId: 'demos'
+			},
+			isArray: true,
+			cache: false
+		}
 	});
+});
+
+// Register the After loading function to load Google Analitycs and Discus
+window.afterLoading = function($location, $window) {
+	var currentPageId = $location.path();
+	$window._gaq.push(['_trackPageview', currentPageId]);
+	//loadDisqus(currentPageId);
+}
 
 //app.config(['$httpProvider', function ($httpProvider) {
 //    var $http,
@@ -83,7 +90,7 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 	$scope.list = [];
 	NProgress.start();
 
-	$scope.list = Demo.query(function(){
+	$scope.list = Demo.query(function() {
 		$scope.loaded = true;
 		NProgress.done();
 	});
@@ -94,11 +101,11 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 		}
 		return '';
 	}
-	
+
 	$scope.setCategory = function(category) {
-		if (category == 'all'){
+		if (category == 'all') {
 			$scope.category = '';
-		}else{
+		} else {
 			$scope.category = category;
 		}
 	}
@@ -134,7 +141,11 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 		});
 		return categories
 	}
-	
+
+	$scope.afterPartialLoaded = function() {
+		afterLoading($location, $window);
+	};
+
 //	$scope.$on('$routeChangeStart', function(scope, next, current) {
 //		console.log('Changing from ' + angular.toJson(current) + ' to ' + angular.toJson(next));
 //	});
@@ -145,7 +156,7 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 
 DemoListCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$log', '$filter', 'Demo'];
 
-function DemoItemCtrl($scope, $routeParams, Demo) {
+function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 	NProgress.start();
 	Demo.get({
 		demoId: $routeParams.demoId
@@ -158,7 +169,16 @@ function DemoItemCtrl($scope, $routeParams, Demo) {
 		};
 		NProgress.done();
 	});
+
+	$scope.getFbUri = function(uri) {
+		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+	}
+
+	$scope.afterPartialLoaded = function() {
+		afterLoading($location, $window);
+	};
+
 	$("#accordion").collapse();
 }
 
-DemoItemCtrl.$inject = ['$scope', '$routeParams', 'Demo'];
+DemoItemCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', 'Demo'];

@@ -34,12 +34,11 @@ and open the template in the editor.
 				</div>
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul id="menu-top" class="nav navbar-nav">
-						<li id="menu-item-677"><a tabindex="-1" href="http://julienrenaux.fr/category/programming/">Programming</a></li>
-						<li id="menu-item-967"><a tabindex="-1" href="http://julienrenaux.fr/category/programming/tutorials/">Tutorials</a></li>
-						<li id="menu-item-678"><a tabindex="-1" href="http://julienrenaux.fr/category/design/">Design</a></li>
-						<li id="menu-item-1261" ><a tabindex="-1" href="http://julienrenaux.fr/category/worth-sharing/">Worth Sharing</a></li>
-						<li id="menu-item-1261" class="active"><a tabindex="-1" href="#/demos">Demo Center</a></li>
-						<li id="menu-item-626"><a tabindex="-1" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Open Source <b class="caret"></b></a>
+						<li class="active"><a tabindex="-1" href="http://demos.julienrenaux.fr/">Demo Center</a></li>
+						<li><a tabindex="-1" href="http://julienrenaux.fr/category/front-end/">Front End</a></li>
+						<li><a tabindex="-1" href="http://julienrenaux.fr/category/programming/tutorials/">Tutorials</a></li>
+						<li><a tabindex="-1" href="http://julienrenaux.fr/category/worth-sharing/">Worth Sharing</a></li>
+						<li><a tabindex="-1" href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Open Source <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li id="menu-item-614" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-614"><a tabindex="-1" href="http://julienrenaux.fr/shprinkone/">ShprinkOne WordPress Theme</a></li>
 							</ul>
@@ -60,7 +59,24 @@ and open the template in the editor.
 		</div>
 
 		<section id="content" class="container">
-			<div data-ng-view></div>
+			<div data-ng-view onload="afterPartialLoaded()"></div>
 		</section>
+		<script type="text/javascript">
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-7727182-2']);
+			_gaq.push(['_setDomainName', 'julienrenaux.fr']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
 	</body>
 </html>
