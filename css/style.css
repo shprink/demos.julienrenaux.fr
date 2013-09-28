@@ -54,7 +54,7 @@ iframe{
 	background: white;
 	position: absolute;
 	left: 0px;
-	overflow: hidden;
+	overflow-y: auto;
 }
 
 .iframe-wrap.iframe-list iframe{
