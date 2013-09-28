@@ -10,20 +10,24 @@
 						</div>
 					</div>
 					<div class="col-md-3 col-lg-3 col-sm-3">
-						<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+						<div class="well well-sm">
+							<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+						</div>
 					</div>
 				</div>
-				<div class="well well-lg clearfix text-center">
+				<div class="well well-lg clearfix">
 					<div class="row">
-						<div class="col-md-4 col-lg-4 col-sm-4">
-							<a href="#demos/{{item.previous.slug}}" data-ng-if='item.previous'  class="btn btn-info btn-lg pull-left">&lt; Previous demo</a>
+						<div class="col-md-3 col-lg-3 col-sm-3">
+							<a href="#demos/{{item.previous.slug}}" data-ng-if='item.previous'  class="btn btn-info btn-lg btn-block">&lt; Previous demo</a>
 						</div>
-						<div class="col-md-4 col-lg-4 col-sm-4">
-							<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-lg">Tutorial</a>
-							<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-lg"><i class="icon-download"></i> Download</a>
+						<div class="col-md-3 col-lg-3 col-sm-3">
+							<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-block btn-lg">Tutorial</a>
 						</div>
-						<div class="col-md-4 col-lg-4 col-sm-4">
-							<a href="#demos/{{item.next.slug}}" data-ng-if='item.next' class="btn btn-info btn-lg pull-right">Next demo &gt;</a>
+						<div class="col-md-3 col-lg-3 col-sm-3">
+							<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-block btn-lg"><i class="icon-download"></i> Download</a>
+						</div>
+						<div class="col-md-3 col-lg-3 col-sm-3">
+							<a href="#demos/{{item.next.slug}}" data-ng-if='item.next' class="btn btn-info btn-lg btn-block">Next demo &gt;</a>
 						</div>
 					</div>
 				</div>
