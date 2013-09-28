@@ -35,10 +35,13 @@ angular.module('demoFactory', ['ngResource'])
 });
 
 // Register the After loading function to load Google Analitycs and Discus
-window.afterLoading = function($location, $window) {
+window.afterLoading = function($location, $window, callback) {
 	var currentPageId = $location.path();
 	$window._gaq.push(['_trackPageview', currentPageId]);
 	//loadDisqus(currentPageId);
+	if (typeof callback == 'function') {
+		callback();
+	}
 }
 
 //app.config(['$httpProvider', function ($httpProvider) {
@@ -92,6 +95,7 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 
 	$scope.list = Demo.query(function() {
 		$scope.loaded = true;
+		$scope.afterPartialLoaded();
 		NProgress.done();
 	});
 
@@ -162,6 +166,7 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 		demoId: $routeParams.demoId
 	}, function(demo) {
 		$scope.item = demo;
+		$scope.afterPartialLoaded();
 		NProgress.done();
 	}, function(error) {
 		$scope.item = {
@@ -175,10 +180,19 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 	}
 
 	$scope.afterPartialLoaded = function() {
-		afterLoading($location, $window);
-	};
+		afterLoading($location, $window, function() {
+			$("#accordion").collapse();
 
-	$("#accordion").collapse();
+			// Delay the first collapsible opening a bit to wait the collapse instanciation
+			setTimeout(function() {
+				$.smoothScroll({
+					scrollTarget: '#content',
+					offset: -50
+				});
+				$("#collapse0").collapse('show');
+			}, 500);
+		});
+	};
 }
 
 DemoItemCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', 'Demo'];
