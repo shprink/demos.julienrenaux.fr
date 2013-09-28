@@ -25,14 +25,19 @@
 						</div>
 						<div class="backdrop-wrap modal-backdrop">
 							<h3><a href="#demos/{{item.slug}}">{{item.title}}</a></h3>
-							<p>{{item.description}}</p>
 						</div>
 						<div class="caption">
 							<div class="well well-sm">
-								<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
-								<div class="btn-group pull-right">
-									<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-sm"><i class="icon-download"></i> Download</a>
-									<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-sm">Tutorial</a>
+								<div class="clearfix">
+									<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-lg-6 col-sm-6">
+										<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-sm btn-block"><i class="icon-book"></i> Tutorial</a>
+									</div>
+									<div class="col-md-6 col-lg-6 col-sm-6">
+										<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-sm btn-block"><i class="icon-download"></i> Download</a>
+									</div>
 								</div>
 							</div>
 						</div>

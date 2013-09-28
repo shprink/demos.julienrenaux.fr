@@ -178,6 +178,10 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 	$scope.getFbUri = function(uri) {
 		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
 	}
+	
+	$scope.collapsed = function(index) {
+		return (index === 0)? 'in' : '';
+	}
 
 	$scope.afterPartialLoaded = function() {
 		afterLoading($location, $window, function() {
@@ -189,7 +193,6 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 					scrollTarget: '#content',
 					offset: -50
 				});
-				$("#collapse0").collapse('show');
 			}, 500);
 		});
 	};

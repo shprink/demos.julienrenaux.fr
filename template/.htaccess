@@ -1,0 +1,51 @@
+AddType x-mapp-php5 .php
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+ErrorDocument  404  http://www.julienrenaux.fr/error_404.php
+ErrorDocument  410  http://www.julienrenaux.fr
+
+# Redirection
+
+Redirect gone /accueil.php
+Redirect gone /fr/accueil
+Redirect gone /fr/cyberfolio
+Redirect gone /fr/profil
+Redirect gone /fr/contact
+Redirect gone /fr/blog/articles/8/version_20
+Redirect gone /fr/profil/curriculum-vitae 
+Redirect gone /profil/curriculum-vitae 
+
+Redirect gone /en/blog/articles/8/20_version
+Redirect gone /en/cyberfolio
+Redirect gone /en/profile
+Redirect gone /en/profile/resume
+Redirect gone /en/home 
+Redirect gone /en/contact
+
+Redirect gone /fr/blog
+Redirect gone /fr/blog/articles/1/enfin_en_ligne_
+Redirect gone /fr/blog/articles/2/bienvenue_a__miami
+Redirect gone /fr/blog/articles/3/stage_datacenter_miami
+Redirect gone /fr/blog/articles/4/site_internet_du_bde
+Redirect gone /fr/blog/articles/5/stage_commarketing
+Redirect gone /fr/blog/articles/6/wellington__job
+Redirect gone /fr/blog/articles/7/voyage_au_mount_cook
+Redirect gone /fr/blog/articles/7/add 
+Redirect gone /fr/blog/articles/8/version_20 
+Redirect gone /fr/blog/articles/9/dimanche__run4fun_ 
+Redirect gone /fr/blog/articles/10/les_blue_mountains 
+Redirect gone /fr/blog/articles/1/enfin_en_ligne_?menu=5&cat=blog&id=1
+
+Redirect gone /articles/9/dimanche__run4fun_
+Redirect gone /en/blog/articles/9/run4fun_on_sunday 
+Redirect gone /download/plaquette_minimale.pdf
+
+
+
+
+

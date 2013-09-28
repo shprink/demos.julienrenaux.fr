@@ -42,7 +42,7 @@
 									</a>
 								</h4>
 							</div>
-							<div id="collapse{{$index}}" class="panel-collapse collapse">
+							<div id="collapse{{$index}}" class="panel-collapse collapse {{collapsed($index)}}">
 								<div class="panel-body">
 									<div class="iframe-wrap iframe-item">
 										<iframe src="{{language.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
