@@ -19,5 +19,13 @@
 		"iframe" : "http://examples.julienrenaux.fr/jquery/load-more",
 		"zip" : "http://julienrenaux.fr/wp-content/uploads/2013/06/load-more-jquery.zip",
 		"category" : "jquery"
+	},
+	{
+		"title": "Load more widget using PHP, ajax and AngularJS",
+		"author": "shprink",
+		"date": "2013/09/05",
+		"slug": "load-more-widget-using-bootstrap-3-angularjs-php-and-ajax",
+		"iframe" : "http://examples.julienrenaux.fr/angular/load-more",
+		"category" : "angularJS"
 	}
 ]

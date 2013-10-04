@@ -11,7 +11,11 @@ var app = angular.module('democenter', ['demoFactory', 'ngRoute'])
 		templateUrl: 'template/demo-list.html',
 		controller: DemoListCtrl
 	}).
-			when('/demos/:demoId', {
+			when('/demos/:category', {
+		templateUrl: 'template/demo-list.html',
+		controller: DemoListCtrl
+	}).
+			when('/demos/:category/:demoId', {
 		templateUrl: 'template/demo-item.html',
 		controller: DemoItemCtrl
 	}).
@@ -44,60 +48,41 @@ window.afterLoading = function($location, $window, callback) {
 	}
 }
 
-//app.config(['$httpProvider', function ($httpProvider) {
-//    var $http,
-//        interceptor = ['$q', '$injector', function ($q, $injector) {
-//            var error;
-//
-//            function success(response) {
-//                // get $http via $injector because of circular dependency problem
-//                $http = $http || $injector.get('$http');
-//                if($http.pendingRequests.length < 1) {
-//                    $('#loadingWidget').hide();
-//                }
-//                return response;
-//            }
-//
-//            function error(response) {
-//                // get $http via $injector because of circular dependency problem
-//                $http = $http || $injector.get('$http');
-//                if($http.pendingRequests.length < 1) {
-//                    $('#loadingWidget').hide();
-//                }
-//                return $q.reject(response);
-//            }
-//
-//            return function (promise) {
-//                $('#loadingWidget').show();
-//                return promise.then(success, error);
-//            }
-//        }];
-//
-//    $httpProvider.responseInterceptors.push(interceptor);
-//}]);
-
-// http://jsfiddle.net/moderndegree/yYEXN/
-//angular.module('demoCache', []).
-//		factory('DemoCache', function($cacheFactory) {
-//	return $cacheFactory('someCache', {
-//		capacity: 3
-//	});
-//});
-
 function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, Demo) {
-	//var $httpDefaultCache = $cacheFactory.get('$http');
-	//	$log.log($httpDefaultCache.removeAll());
-	//$cacheFactory.get('$http').removeAll();
 	$scope.loaded = false;
-	$scope.category = '';
 	$scope.list = [];
+	if (typeof $routeParams.category === 'undefined') {
+		$scope.category = '';
+	}
+	else {
+		$scope.category = ($routeParams.category == 'all') ? '' : $routeParams.category;
+	}
 	NProgress.start();
 
-	$scope.list = Demo.query(function() {
+	$scope.list = Demo.query(function(results) {
 		$scope.loaded = true;
 		$scope.afterPartialLoaded();
+		var categories = {
+			'all': {
+				'name': 'all',
+				'count': $scope.list.lenght,
+				'href': '#demos'
+			}
+		};
+		angular.forEach($scope.list, function(value, key) {
+			if (typeof categories[value.category] == 'undefined') {
+				categories[value.category] = {
+					'name': value.category,
+					'count': 0,
+					'href': '#demos-' + value.category
+				}
+			}
+			categories[value.category]['count'] += 1;
+		});
+		$scope.categories = categories;
 		NProgress.done();
 	});
+
 
 	$scope.getRoute = function() {
 		if (typeof $routeParams.category != 'undefined') {
@@ -121,30 +106,30 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 		return '';
 	}
 
-	$scope.getFbUri = function(uri) {
-		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+	$scope.getFbUri = function(category, uri) {
+		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
 	}
 
-	$scope.getCategories = function() {
-		var categories = {
-			'all': {
-				'name': 'all',
-				'count': $scope.list.lenght,
-				'href': '#demos'
-			}
-		};
-		angular.forEach($scope.list, function(value, key) {
-			if (typeof categories[value.category] == 'undefined') {
-				categories[value.category] = {
-					'name': value.category,
-					'count': 0,
-					'href': '#demos-' + value.category
-				}
-			}
-			categories[value.category]['count'] += 1;
-		});
-		return categories
-	}
+//	$scope.getCategories = function() {
+//		var categories = {
+//			'all': {
+//				'name': 'all',
+//				'count': $scope.list.lenght,
+//				'href': '#demos'
+//			}
+//		};
+//		angular.forEach($scope.list, function(value, key) {
+//			if (typeof categories[value.category] == 'undefined') {
+//				categories[value.category] = {
+//					'name': value.category,
+//					'count': 0,
+//					'href': '#demos-' + value.category
+//				}
+//			}
+//			categories[value.category]['count'] += 1;
+//		});
+//		return categories
+//	}
 
 	$scope.afterPartialLoaded = function() {
 		afterLoading($location, $window);
@@ -175,12 +160,12 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 		NProgress.done();
 	});
 
-	$scope.getFbUri = function(uri) {
-		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+	$scope.getFbUri = function(category, uri) {
+		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
 	}
-	
+
 	$scope.collapsed = function(index) {
-		return (index === 0)? 'in' : '';
+		return (index === 0) ? 'in' : '';
 	}
 
 	$scope.afterPartialLoaded = function() {

@@ -1,0 +1,27 @@
+{
+	"title": "Load more widget using Bootstrap 3, AngularJS, PHP and Ajax",
+	"date": "2013/09/05",
+	"slug": "load-more-widget-using-bootstrap-3-angularjs-php-and-ajax",
+	"iframe": "http://examples.julienrenaux.fr/angular/load-more",
+	"category": "angularJS",
+	"code": [
+		{
+			"name": "JavaScript (AngularJS)",
+			"iframe": "http://examples.julienrenaux.fr/angular/load-more/js.html"
+		},
+		{
+			"name": "PHP",
+			"iframe": "http://examples.julienrenaux.fr/angular/load-more/php.html"
+		},
+		{
+			"name": "HTML",
+			"iframe": "http://examples.julienrenaux.fr/angular/load-more/html.html"
+		}
+	],
+	"previous": {
+		"title": "Load more widget using PHP, ajax and JQuery",
+		"date": "2013/06/13",
+		"slug": "load-more-widget-using-php-ajax-and-jquery",
+		"category": "jquery"
+	}
+}

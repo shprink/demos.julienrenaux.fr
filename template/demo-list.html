@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-3 col-lg-3">
 			<div class="list-group">
-				<a data-ng-repeat="category in getCategories()" data-ng-click="setCategory(category.name)"  class="list-group-item {{isActive(category.name)}}">
+				<a data-ng-repeat="category in categories" data-ng-click="setCategory(category.name)" href="#demos/{{category.name}}"  class="list-group-item {{isActive(category.name)}}">
 					{{category.name}}
 					<span class="badge">{{category.count}}</span>
 				</a>
@@ -24,12 +24,12 @@
 							<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
 						</div>
 						<div class="backdrop-wrap modal-backdrop">
-							<h3><a href="#demos/{{item.slug}}">{{item.title}}</a></h3>
+							<h3><a href="#demos/{{item.category}}/{{item.slug}}">{{item.title}}</a></h3>
 						</div>
 						<div class="caption">
 							<div class="well well-sm">
 								<div class="clearfix">
-									<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+									<iframe src="{{getFbUri(item.category, item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
 								</div>
 								<div class="row">
 									<div class="col-md-6 col-lg-6 col-sm-6">

@@ -11,14 +11,14 @@
 					</div>
 					<div class="col-md-3 col-lg-3 col-sm-3">
 						<div class="well well-sm">
-							<iframe src="{{getFbUri(item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
+							<iframe src="{{getFbUri(item.category, item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
 						</div>
 					</div>
 				</div>
 				<div class="well well-lg clearfix">
 					<div class="row">
 						<div class="col-md-3 col-lg-3 col-sm-3">
-							<a href="#demos/{{item.previous.slug}}" data-ng-if='item.previous'  class="btn btn-info btn-lg btn-block"><i class="icon-chevron-left "></i> Previous demo</a>
+							<a href="#demos/{{item.previous.category}}/{{item.previous.slug}}" data-ng-if='item.previous'  class="btn btn-info btn-lg btn-block"><i class="icon-chevron-left "></i> Previous demo</a>
 						</div>
 						<div class="col-md-3 col-lg-3 col-sm-3">
 							<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-block btn-lg"><i class="icon-book"></i> Tutorial</a>
@@ -27,7 +27,7 @@
 							<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-block btn-lg"><i class="icon-download"></i> Download</a>
 						</div>
 						<div class="col-md-3 col-lg-3 col-sm-3">
-							<a href="#demos/{{item.next.slug}}" data-ng-if='item.next' class="btn btn-info btn-lg btn-block">Next demo <i class="icon-chevron-right "></i> </a>
+							<a href="#demos/{{item.next.category}}/{{item.next.slug}}" data-ng-if='item.next' class="btn btn-info btn-lg btn-block">Next demo <i class="icon-chevron-right "></i> </a>
 						</div>
 					</div>
 				</div>
