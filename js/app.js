@@ -3,6 +3,7 @@ var app = angular.module('democenter', ['demoFactory', 'ngRoute'])
 	$sceDelegateProvider.resourceUrlWhitelist([
 		'examples.julienrenaux.fr',
 		'connect.facebook.net',
+		'localhost',
 		'facebook.com',
 		'/template'
 	]);
@@ -38,51 +39,75 @@ angular.module('demoFactory', ['ngResource'])
 	});
 });
 
-// Register the After loading function to load Google Analitycs and Discus
-window.afterLoading = function($location, $window, callback) {
-	var currentPageId = $location.path();
-	$window._gaq.push(['_trackPageview', currentPageId]);
-	//loadDisqus(currentPageId);
-	if (typeof callback == 'function') {
-		callback();
-	}
-}
+app.service('DemoServices', function() {
+	return new (function() {
 
-function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, Demo) {
-	$scope.loaded = false;
-	$scope.list = [];
-	if (typeof $routeParams.category === 'undefined') {
-		$scope.category = '';
-	}
-	else {
-		$scope.category = ($routeParams.category == 'all') ? '' : $routeParams.category;
-	}
-	NProgress.start();
-
-	$scope.list = Demo.query(function(results) {
-		$scope.loaded = true;
-		$scope.afterPartialLoaded();
-		var categories = {
-			'all': {
-				'name': 'all',
-				'count': $scope.list.lenght,
-				'href': '#demos'
+		this.initializeCategory = function($routeParams) {
+			if (typeof $routeParams.category === 'undefined') {
+				return '';
+			}
+			else {
+				return ($routeParams.category == 'all') ? '' : $routeParams.category;
 			}
 		};
-		angular.forEach($scope.list, function(value, key) {
-			if (typeof categories[value.category] == 'undefined') {
-				categories[value.category] = {
-					'name': value.category,
-					'count': 0,
-					'href': '#demos-' + value.category
-				}
-			}
-			categories[value.category]['count'] += 1;
-		});
-		$scope.categories = categories;
-		NProgress.done();
-	});
+		this.getList = function($scope, Demo, NProgress) {
+			return  Demo.query(function(results) {
+				$scope.loaded = true;
+				$scope.afterPartialLoaded();
+				var categories = {
+					'all': {
+						'name': 'all',
+						'count': $scope.list.lenght,
+						'href': '#demos'
+					}
+				};
+				angular.forEach($scope.list, function(value, key) {
+					if (typeof categories[value.category] == 'undefined') {
+						categories[value.category] = {
+							'name': value.category,
+							'count': 0,
+							'href': '#demos-' + value.category
+						}
+					}
+					categories[value.category]['count'] += 1;
+				});
+				$scope.categories = categories;
+				NProgress.done();
+			});
+		}
 
+		this.getFbUri = function(category, uri) {
+			return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+		}
+
+		this.categoryIsActive = function($scope, category) {
+			if (category === $scope.category || ($scope.category == '' && category === 'all')) {
+				return 'active';
+			}
+			return '';
+		}
+
+		this.setCategory = function(category) {
+			if (category == 'all') {
+				return '';
+			} else {
+				return category;
+			}
+		}
+
+		this.afterLoading = function($location, $window) {
+			var currentPageId = $location.path();
+			$window._gaq.push(['_trackPageview', currentPageId]);
+			//loadDisqus(currentPageId);
+		}
+	})();
+});
+
+function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, Demo, DemoServices) {
+	NProgress.start();
+	$scope.loaded = false;
+	$scope.category = DemoServices.initializeCategory($routeParams);
+	$scope.list = DemoServices.getList($scope, Demo, NProgress);
 
 	$scope.getRoute = function() {
 		if (typeof $routeParams.category != 'undefined') {
@@ -92,47 +117,19 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 	}
 
 	$scope.setCategory = function(category) {
-		if (category == 'all') {
-			$scope.category = '';
-		} else {
-			$scope.category = category;
-		}
+		$scope.category = DemoServices.setCategory(category);
 	}
 
-	$scope.isActive = function(category) {
-		if (category === $scope.category || ($scope.category == '' && category === 'all')) {
-			return 'active';
-		}
-		return '';
+	$scope.categoryIsActive = function(category) {
+		return DemoServices.categoryIsActive($scope, category);
 	}
 
 	$scope.getFbUri = function(category, uri) {
-		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+		return DemoServices.getFbUri(category, uri);
 	}
 
-//	$scope.getCategories = function() {
-//		var categories = {
-//			'all': {
-//				'name': 'all',
-//				'count': $scope.list.lenght,
-//				'href': '#demos'
-//			}
-//		};
-//		angular.forEach($scope.list, function(value, key) {
-//			if (typeof categories[value.category] == 'undefined') {
-//				categories[value.category] = {
-//					'name': value.category,
-//					'count': 0,
-//					'href': '#demos-' + value.category
-//				}
-//			}
-//			categories[value.category]['count'] += 1;
-//		});
-//		return categories
-//	}
-
 	$scope.afterPartialLoaded = function() {
-		afterLoading($location, $window);
+		DemoServices.afterLoading($location, $window);
 	};
 
 //	$scope.$on('$routeChangeStart', function(scope, next, current) {
@@ -143,14 +140,17 @@ function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, D
 //	});
 }
 
-DemoListCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$log', '$filter', 'Demo'];
+DemoListCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$log', '$filter', 'Demo', 'DemoServices'];
 
-function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
+function DemoItemCtrl($scope, $location, $window, $routeParams, $timeout, Demo, DemoServices) {
 	NProgress.start();
-	Demo.get({
+	$scope.loaded = false;
+	$scope.category = DemoServices.initializeCategory($routeParams);
+	$scope.list = DemoServices.getList($scope, Demo, NProgress);
+
+	$scope.item = Demo.get({
 		demoId: $routeParams.demoId
 	}, function(demo) {
-		$scope.item = demo;
 		$scope.afterPartialLoaded();
 		NProgress.done();
 	}, function(error) {
@@ -160,8 +160,16 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 		NProgress.done();
 	});
 
+	$scope.setCategory = function(category) {
+		$scope.category = DemoServices.setCategory(category);
+	}
+
+	$scope.categoryIsActive = function(category) {
+		return DemoServices.categoryIsActive($scope, category);
+	}
+
 	$scope.getFbUri = function(category, uri) {
-		return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+		return DemoServices.getFbUri(category, uri);
 	}
 
 	$scope.collapsed = function(index) {
@@ -169,18 +177,15 @@ function DemoItemCtrl($scope, $location, $window, $routeParams, Demo) {
 	}
 
 	$scope.afterPartialLoaded = function() {
-		afterLoading($location, $window, function() {
+		DemoServices.afterLoading($location, $window);
+		$timeout(function() {
 			$("#accordion").collapse();
-
-			// Delay the first collapsible opening a bit to wait the collapse instanciation
-			setTimeout(function() {
-				$.smoothScroll({
-					scrollTarget: '#content',
-					offset: -50
-				});
-			}, 500);
-		});
+			$.smoothScroll({
+				scrollTarget: '#content',
+				offset: -50
+			});
+		}, 0);
 	};
 }
 
-DemoItemCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', 'Demo'];
+DemoItemCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$timeout', 'Demo', 'DemoServices'];
