@@ -1,6 +1,6 @@
 <h2>Categories</h2>
 <div class="list-group">
-	<a data-ng-repeat="category in categories" data-ng-click="setCategory(category.name)" href="#demos/{{category.name}}"  class="list-group-item {{categoryIsActive(category.name)}}">
+	<a data-ng-repeat="category in categories" href="{{category.href}}"  class="list-group-item {{categoryIsActive(category.name)}}">
 		{{category.name}}
 		<span class="badge">{{category.count}}</span>
 	</a>

@@ -57,16 +57,16 @@ app.service('DemoServices', function() {
 				var categories = {
 					'all': {
 						'name': 'all',
-						'count': $scope.list.lenght,
+						'count': results.length,
 						'href': '#demos'
 					}
 				};
-				angular.forEach($scope.list, function(value, key) {
+				angular.forEach(results, function(value, key) {
 					if (typeof categories[value.category] == 'undefined') {
 						categories[value.category] = {
 							'name': value.category,
 							'count': 0,
-							'href': '#demos-' + value.category
+							'href': '#demos/' + value.category
 						}
 					}
 					categories[value.category]['count'] += 1;
