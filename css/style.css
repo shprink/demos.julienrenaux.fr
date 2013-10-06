@@ -90,7 +90,7 @@ iframe{
 .thumbnail .caption{
 	padding: 0px;
 }
-.thumbnail .caption .well{
+.thumbnail .well{
 	margin: 0px;
 }
 
@@ -181,4 +181,9 @@ iframe{
 #content{
 	min-height: 400px;
 	margin-bottom: 50px;
+}
+
+.item .thumbnail{
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }

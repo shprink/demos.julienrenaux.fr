@@ -10,7 +10,7 @@
 			</div>
 			<br/>
 			<div class="row">
-				<div data-ng-repeat="item in list | filter:query | filter:{category: category} | orderBy:index:reverse" class="col-md-6 col-lg-6">
+				<div data-ng-repeat="item in list | filter:query | filter:{category: category} | orderBy:index:reverse" class="item col-md-6 col-lg-6">
 					<div class="thumbnail">
 						<div class="iframe-wrap iframe-list">
 							<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
