@@ -2,7 +2,9 @@
 	"title": "Load more widget using Bootstrap 3, AngularJS, PHP and Ajax",
 	"date": "2013/09/05",
 	"slug": "load-more-widget-using-bootstrap-3-angularjs-php-and-ajax",
+	"tutorial" : "http://julienrenaux.fr/2013/10/27/create-a-load-more-widget-using-angularjs-ajax-and-bootstrap-3/",
 	"iframe": "http://examples.julienrenaux.fr/angular/load-more",
+	"zip" : "http://julienrenaux.fr/wp-content/uploads/2013/10/load-more-angularjs.zip",
 	"category": "angularJS",
 	"code": [
 		{
