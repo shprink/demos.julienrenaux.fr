@@ -1,2 +1,4 @@
 bower_components/
 nbproject/
+.DS_Store
+node_modules/

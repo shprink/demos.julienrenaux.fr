@@ -1,12 +1,18 @@
 <h2>Categories</h2>
 <div class="list-group">
-	<a data-ng-repeat="category in categories" href="{{category.href}}"  class="list-group-item {{categoryIsActive(category.name)}}">
+	<a data-ng-repeat="category in categories" href="{{category.href}}"  class="list-group-item" ng-class="{active: currentCategory == category.value}">
 		{{category.name}}
 		<span class="badge">{{category.count}}</span>
 	</a>
 </div>
-<h2>Stay tuned!</h2>
-<iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2Fjulienrenauxblog&amp;width=200&amp;height=80&amp;colorscheme=light&amp;layout=standard&amp;show_faces=true&amp;appId=206488179525466" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:80px;" allowTransparency="true"></iframe>
-<iframe allowtransparency="true" frameborder="0" scrolling="no"
-  src="//platform.twitter.com/widgets/follow_button.html?screen_name=julienrenaux"
-  style="width:300px; height:20px;"></iframe>
+<div class="well">
+<h4>Stay tuned!</h4>
+<div class="btn-group btn-group-justified text-center">
+<a data-toggle="tooltip" style="margin-bottom: 5px" class="btn btn-md btn-danger" target="_blank" href="http://feeds.feedburner.com/julienrenauxblog" title="follow my RSS feed"><i class="icon-rss icon-2x"></i></a>
+<a data-toggle="tooltip" style="margin-bottom: 5px" class="btn btn-md btn-primary" target="_blank" href="https://github.com/shprink" title="follow me on GitHub"><i class="icon-github icon-2x"></i></a>
+<a data-toggle="tooltip" class="btn btn-md btn-default" target="_blank" href="https://plus.google.com/+julienrenaux?rel=author" title="follow me on Google Plus"><i class="icon-google-plus icon-2x"></i></a>
+</div>
+<a class="twitter-timeline" href="https://twitter.com/julienrenaux" data-widget-id="496990113549651968">Tweets by @julienrenaux</a>
+<div class="fb-like-box" data-width="250" data-href="https://www.facebook.com/julienrenauxblog"  data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false" style="margin: 0 -10px"></div>
+<div id="fb-root"></div>
+</div>

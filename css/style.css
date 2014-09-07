@@ -1,4 +1,6 @@
-body { 
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+
+body {
 	padding-top: 50px;
 	background-color: #f8f8f8;
 }
@@ -15,6 +17,10 @@ body {
 	background: -ms-linear-gradient(top,  #3f4c6b 0%,#3f4c6b 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #3f4c6b 0%,#3f4c6b 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+}
+
+.demo-header h1{
+	color: white;
 }
 
 
@@ -153,30 +159,35 @@ iframe{
 	opacity: 0;
 }
 
-#nprogress .bar {
-	background: white;
+/* Styling for the ngProgress itself */
+#ngProgress {
+	margin: 0;
+	padding: 0;
+	z-index: 99998;
+	background-color: #3f4c6b !important;
+	color: #3f4c6b !important;
+	box-shadow: 0 0 10px 0; /* Inherits the font color */
+	height: 2px;
+	opacity: 0;
+
+	/* Add CSS3 styles for transition smoothing */
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
 
-#nprogress .peg {
-	box-shadow: 0 0 10px #29d 0 0 5px #29d;
+/* Styling for the ngProgress-container */
+#ngProgress-container {
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 99999;
 }
 
-#nprogress .bar,
-#nprogress .spinner {
-	z-index: 1040;
-}
-
-#nprogress .spinner {
-	top: 18px;
-}
-
-#nprogress .spinner-icon {
-	border-top-color:  #FFF;
-	border-left-color: #FFF;
-	width: 25px;
-	height: 25px;
-	border-radius: 25px;
-}
 
 #content{
 	min-height: 400px;

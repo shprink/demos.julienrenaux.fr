@@ -1,42 +1,39 @@
-<section class="demo-list">
+<div class="col-md-10 col-lg-9">
+	<div class="input-group">
+		<span class="input-group-addon"><i class="icon-search"></i></span>
+		<input type="text" class="form-control" data-ng-model="query" placeholder="Search"/>
+	</div>
+	<br/>
 	<div class="row">
-		<div class="col-md-3 col-lg-3">
-			<div data-ng-include="'template/sidebar.html'"></div>
-		</div>
-		<div data-ng-show="loaded"class="col-md-10 col-lg-9">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="icon-search"></i></span>
-				<input type="text" class="form-control" data-ng-model="query" placeholder="Search"/>
-			</div>
-			<br/>
-			<div class="row">
-				<div data-ng-repeat="item in list | filter:query | filter:{category: category} | orderBy:index:reverse" class="item col-md-6 col-lg-6">
-					<div class="thumbnail">
-						<div class="iframe-wrap iframe-list">
-							<iframe src="{{item.iframe}}" onload="$(this).parent().addClass('loaded');"></iframe>
+		<div data-ng-repeat="item in list | filter:query | filter:{category: currentCategory} | orderBy:index:reverse" class="item col-md-6 col-lg-6">
+			<div class="thumbnail">
+				<div class="iframe-wrap iframe-list">
+					<iframe ng-src="{{trustSrc(item.iframe)}}" onload="angular.element(this).parent().addClass('loaded');"></iframe>
+				</div>
+				<div class="backdrop-wrap modal-backdrop">
+					<h3><a href="#demos/{{item.category}}/{{item.slug}}">{{item.title}}</a></h3>
+				</div>
+				<div class="caption">
+					<div class="well well-sm">
+						<div class="clearfix">
+							<iframe ng-src="{{trustSrc(getFbUri(item.category, item.slug))}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
 						</div>
-						<div class="backdrop-wrap modal-backdrop">
-							<h3><a href="#demos/{{item.category}}/{{item.slug}}">{{item.title}}</a></h3>
-						</div>
-						<div class="caption">
-							<div class="well well-sm">
-								<div class="clearfix">
-									<iframe src="{{getFbUri(item.category, item.slug)}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:30px;" allowTransparency="true"></iframe>
-								</div>
-								<div class="row">
-									<div class="col-md-6 col-lg-6 col-sm-6">
-										<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-sm btn-block"><i class="icon-book"></i> Tutorial</a>
-									</div>
-									<div class="col-md-6 col-lg-6 col-sm-6">
-										<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-sm btn-block"><i class="icon-download"></i> Download</a>
-									</div>
-								</div>
+						<ul class="list-unstyled">
+							<li class="text-muted">
+								<i class="icon-folder-open"></i> {{item.category}}
+							</li>
+						</ul>
+						<div class="row">
+							<div class="col-md-6 col-lg-6 col-sm-6">
+								<a href="{{item.tutorial}}" data-ng-if='item.tutorial' class="btn btn-primary btn-sm btn-block"><i class="icon-book"></i> Tutorial</a>
+							</div>
+							<div class="col-md-6 col-lg-6 col-sm-6">
+								<a href="{{item.zip}}" data-ng-if='item.zip' class="btn btn-success btn-sm btn-block"><i class="icon-download"></i> Download</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-</section>
+</div>

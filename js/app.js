@@ -1,191 +1,128 @@
-var app = angular.module('democenter', ['demoFactory', 'ngRoute'])
-		.config(function($routeProvider, $sceDelegateProvider) {
-	$sceDelegateProvider.resourceUrlWhitelist([
-		'examples.julienrenaux.fr',
-		'connect.facebook.net',
-		'localhost',
-		'facebook.com',
-		'/template'
-	]);
-	$routeProvider.
-			when('/demos', {
-		templateUrl: 'template/demo-list.html',
-		controller: DemoListCtrl
-	}).
-			when('/demos/:category', {
-		templateUrl: 'template/demo-list.html',
-		controller: DemoListCtrl
-	}).
-			when('/demos/:category/:demoId', {
-		templateUrl: 'template/demo-item.html',
-		controller: DemoItemCtrl
-	}).
-			otherwise({
-		redirectTo: '/demos'
-	});
-});
+angular.module('democenter', [
+    'demoFactory',
+    'ngRoute',
+    'ngProgress',
+    'ui.bootstrap'
+]).run(['$rootScope', '$sce', 'DemoService', 'Demo', '$routeParams',
+    function($rootScope, $sce, DemoService, Demo, $routeParams) {
+        $rootScope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+        }
+
+        $rootScope.list = (function(){ return Demo.query(function(results) {
+			var categories = {
+				'all': {
+					'name': 'all',
+					'value': '',
+					'count': results.length,
+					'href': '#demos'
+				}
+			};
+			angular.forEach(results, function(value, key) {
+				if (typeof categories[value.category] == 'undefined') {
+					categories[value.category] = {
+						'name': value.category,
+						'count': 0,
+						'value': value.category,
+						'href': '#demos/' + value.category
+					}
+				}
+				categories[value.category]['count'] += 1;
+			});
+			$rootScope.categories = categories;
+		})})();
+
+		$rootScope.$on('$routeChangeSuccess', function(scope, next, current){
+			if (typeof next.params.category !== 'undefined'){
+				$rootScope.currentCategory = next.params.category;
+			} else {
+				$rootScope.currentCategory = '';
+			}
+            DemoService.afterLoading();
+		});
+
+        $rootScope.getFbUri = function(category, uri) {
+            return DemoService.getFbUri(category, uri);
+        }
+    }
+]);
 
 angular.module('demoFactory', ['ngResource'])
-		.factory('Demo', function($resource) {
-	return $resource('data/:demoId.json', {}, {
-		query: {
-			method: 'GET',
-			params: {
-				demoId: 'demos'
-			},
-			isArray: true,
-			cache: false
-		}
-	});
-});
+    .factory('Demo', function($resource) {
+        return $resource('data/:demoId.json', {}, {
+            query: {
+                method: 'GET',
+                params: {
+                    demoId: 'demos'
+                },
+                isArray: true,
+                cache: false
+            }
+        });
+    });
 
-app.service('DemoServices', function() {
-	return new (function() {
+angular.module('democenter').config(['$sceDelegateProvider',
+    function($sceDelegateProvider) {
+        $sceDelegateProvider.resourceUrlWhitelist([
+            'examples.julienrenaux.fr',
+            'connect.facebook.net',
+            'www.facebook.com',
+            'self'
+        ]);
 
-		this.initializeCategory = function($routeParams) {
-			if (typeof $routeParams.category === 'undefined') {
-				return '';
-			}
-			else {
-				return ($routeParams.category == 'all') ? '' : $routeParams.category;
-			}
-		};
-		this.getList = function($scope, Demo, NProgress) {
-			return  Demo.query(function(results) {
-				$scope.loaded = true;
-				$scope.afterPartialLoaded();
-				var categories = {
-					'all': {
-						'name': 'all',
-						'count': results.length,
-						'href': '#demos'
-					}
-				};
-				angular.forEach(results, function(value, key) {
-					if (typeof categories[value.category] == 'undefined') {
-						categories[value.category] = {
-							'name': value.category,
-							'count': 0,
-							'href': '#demos/' + value.category
-						}
-					}
-					categories[value.category]['count'] += 1;
-				});
-				$scope.categories = categories;
-				NProgress.done();
-			});
-		}
+    }
+]);
 
-		this.getFbUri = function(category, uri) {
-			return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent('http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) + '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
-		}
+angular.module('democenter').config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.
+        when('/demos', {
+            templateUrl: 'template/demo-list.html'
+        }).
+        when('/demos/:category', {
+            templateUrl: 'template/demo-list.html'
+        }).
+        when('/demos/:category/:demoId', {
+            templateUrl: 'template/demo-item.html',
+            controller: DemoItemCtrl
+        }).
+        otherwise({
+            redirectTo: '/demos'
+        });
+    }
+]);
 
-		this.categoryIsActive = function($scope, category) {
-			if (category === $scope.category || ($scope.category == '' && category === 'all')) {
-				return 'active';
-			}
-			return '';
-		}
+angular.module('democenter').service('DemoService', ['ngProgress', '$window', '$location',
+    function(ngProgress, $window, $location) {
 
-		this.setCategory = function(category) {
-			if (category == 'all') {
-				return '';
-			} else {
-				return category;
-			}
-		}
+        this.getFbUri = function(category, uri) {
+            return '//www.facebook.com/plugins/like.php?href=' + encodeURIComponent(
+                'http://demos.julienrenaux.fr/#/demos/' + category + '/' + uri) +
+                '&amp;width=200&amp;height=30&amp;colorscheme=light&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;send=false';
+        }
 
-		this.afterLoading = function($location, $window) {
-			var currentPageId = $location.path();
-			$window._gaq.push(['_trackPageview', currentPageId]);
-			//loadDisqus(currentPageId);
-		}
-	})();
-});
+        this.afterLoading = function() {
+            var currentPageId = $location.path();
+            if (typeof $window._gaq !== 'undefined') {
+                $window._gaq.push(['_trackPageview', currentPageId]);
+            }
+        }
+    }
+]);
 
-function DemoListCtrl($scope, $location, $window, $routeParams, $log, $filter, Demo, DemoServices) {
-	NProgress.start();
-	$scope.loaded = false;
-	$scope.category = DemoServices.initializeCategory($routeParams);
-	$scope.list = DemoServices.getList($scope, Demo, NProgress);
+function DemoItemCtrl($scope, $location, $routeParams, Demo, ngProgress) {
+    ngProgress.start();
 
-	$scope.getRoute = function() {
-		if (typeof $routeParams.category != 'undefined') {
-			return  $routeParams.category;
-		}
-		return '';
-	}
-
-	$scope.setCategory = function(category) {
-		$scope.category = DemoServices.setCategory(category);
-	}
-
-	$scope.categoryIsActive = function(category) {
-		return DemoServices.categoryIsActive($scope, category);
-	}
-
-	$scope.getFbUri = function(category, uri) {
-		return DemoServices.getFbUri(category, uri);
-	}
-
-	$scope.afterPartialLoaded = function() {
-		DemoServices.afterLoading($location, $window);
-	};
-
-//	$scope.$on('$routeChangeStart', function(scope, next, current) {
-//		console.log('Changing from ' + angular.toJson(current) + ' to ' + angular.toJson(next));
-//	});
-//	$scope.$on('$routeChangeSuccess', function(scope, next, current) {
-//		console.log('success');
-//	});
+    $scope.item = Demo.get({
+        demoId: $routeParams.demoId
+    }, function(demo) {
+        ngProgress.complete();
+    }, function(error) {
+        $scope.item = {
+            name: 'Oups Something wrong happened'
+        };
+        ngProgress.complete();
+    });
 }
 
-DemoListCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$log', '$filter', 'Demo', 'DemoServices'];
-
-function DemoItemCtrl($scope, $location, $window, $routeParams, $timeout, Demo, DemoServices) {
-	NProgress.start();
-	$scope.loaded = false;
-	$scope.category = DemoServices.initializeCategory($routeParams);
-	$scope.list = DemoServices.getList($scope, Demo, NProgress);
-
-	$scope.item = Demo.get({
-		demoId: $routeParams.demoId
-	}, function(demo) {
-		$scope.afterPartialLoaded();
-		NProgress.done();
-	}, function(error) {
-		$scope.item = {
-			name: 'Oups Something wrong happened'
-		};
-		NProgress.done();
-	});
-
-	$scope.setCategory = function(category) {
-		$scope.category = DemoServices.setCategory(category);
-	}
-
-	$scope.categoryIsActive = function(category) {
-		return DemoServices.categoryIsActive($scope, category);
-	}
-
-	$scope.getFbUri = function(category, uri) {
-		return DemoServices.getFbUri(category, uri);
-	}
-
-	$scope.collapsed = function(index) {
-		return (index === 0) ? 'in' : '';
-	}
-
-	$scope.afterPartialLoaded = function() {
-		DemoServices.afterLoading($location, $window);
-		$timeout(function() {
-			$("#accordion").collapse();
-			$.smoothScroll({
-				scrollTarget: '#content',
-				offset: -50
-			});
-		}, 0);
-	};
-}
-
-DemoItemCtrl.$inject = ['$scope', '$location', '$window', '$routeParams', '$timeout', 'Demo', 'DemoServices'];
+DemoItemCtrl.$inject = ['$scope', '$location', '$routeParams', 'Demo', 'ngProgress'];
